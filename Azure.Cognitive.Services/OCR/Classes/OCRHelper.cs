@@ -27,6 +27,7 @@ namespace OCR.Classes
             List<string> fullMenu = await GetLunchMenuAsync();
             bool startLogging = false;
             List<string> weekDayNames = new List<string> {"MON", "TUE", "WED", "THU", "FRI"};
+
             fullMenu.ForEach(m => {
                 if (m.Equals(WeekDay, StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -67,6 +68,7 @@ namespace OCR.Classes
             }
             catch (Exception exp)
             {
+                throw;
             }
             return WeekMenu;
         }
@@ -99,6 +101,7 @@ namespace OCR.Classes
             catch (Exception e)
             {
                 Debug.WriteLine("\n" + e.Message);
+                throw;
             }
             return retVal;
         }
