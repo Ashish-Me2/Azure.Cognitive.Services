@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCR", "OCR\OCR.csproj", "{986E6112-1189-4497-9312-DB11B077B413}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harness", "Harness\Harness.csproj", "{02394487-8D17-4784-8ED2-9A707A76829D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{986E6112-1189-4497-9312-DB11B077B413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{986E6112-1189-4497-9312-DB11B077B413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{986E6112-1189-4497-9312-DB11B077B413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02394487-8D17-4784-8ED2-9A707A76829D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02394487-8D17-4784-8ED2-9A707A76829D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02394487-8D17-4784-8ED2-9A707A76829D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02394487-8D17-4784-8ED2-9A707A76829D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

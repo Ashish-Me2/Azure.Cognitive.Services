@@ -1,0 +1,855 @@
+﻿{
+  "language": "en",
+  "orientation": "Up",
+  "textAngle": 0.0,
+  "regions": [
+    {
+      "boundingBox": "41,48,226,401",
+      "lines": [
+        {
+          "boundingBox": "165,48,102,31",
+          "words": [
+            {
+              "boundingBox": "165,48,102,31",
+              "text": "MON"
+            }
+          ]
+        },
+        {
+          "boundingBox": "157,90,72,39",
+          "words": [
+            {
+              "boundingBox": "157,90,72,39",
+              "text": "JUL"
+            }
+          ]
+        },
+        {
+          "boundingBox": "65,164,42,18",
+          "words": [
+            {
+              "boundingBox": "65,164,42,18",
+              "text": "Pav"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,169,7,7",
+          "words": [
+            {
+              "boundingBox": "41,169,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,200,82,25",
+          "words": [
+            {
+              "boundingBox": "41,206,7,7",
+              "text": "•"
+            },
+            {
+              "boundingBox": "65,200,58,25",
+              "text": "Bhaji"
+            }
+          ]
+        },
+        {
+          "boundingBox": "63,238,125,25",
+          "words": [
+            {
+              "boundingBox": "63,239,44,24",
+              "text": "Veg"
+            },
+            {
+              "boundingBox": "116,238,72,19",
+              "text": "Cutlet"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,244,7,7",
+          "words": [
+            {
+              "boundingBox": "41,244,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "65,275,116,19",
+          "words": [
+            {
+              "boundingBox": "65,275,57,19",
+              "text": "Plain"
+            },
+            {
+              "boundingBox": "133,275,48,19",
+              "text": "Rice"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,281,7,7",
+          "words": [
+            {
+              "boundingBox": "41,281,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "65,312,166,21",
+          "words": [
+            {
+              "boundingBox": "65,312,63,20",
+              "text": "Lauki"
+            },
+            {
+              "boundingBox": "137,313,94,20",
+              "text": "Sambar"
+            }
+          ]
+        },
+        {
+          "boundingBox": "65,350,194,25",
+          "words": [
+            {
+              "boundingBox": "65,350,82,19",
+              "text": "Pudina"
+            },
+            {
+              "boundingBox": "157,350,102,25",
+              "text": "Chutney"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,356,7,7",
+          "words": [
+            {
+              "boundingBox": "41,356,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "64,388,56,19",
+          "words": [
+            {
+              "boundingBox": "64,388,56,19",
+              "text": "Curd"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,394,7,7",
+          "words": [
+            {
+              "boundingBox": "41,394,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "64,425,155,24",
+          "words": [
+            {
+              "boundingBox": "64,425,70,19",
+              "text": "Gulab"
+            },
+            {
+              "boundingBox": "140,426,79,23",
+              "text": "Jamun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "377,48,263,171",
+      "lines": [
+        {
+          "boundingBox": "464,48,80,31",
+          "words": [
+            {
+              "boundingBox": "464,48,80,31",
+              "text": "TUE"
+            }
+          ]
+        },
+        {
+          "boundingBox": "460,90,73,39",
+          "words": [
+            {
+              "boundingBox": "460,90,73,39",
+              "text": "JUL"
+            }
+          ]
+        },
+        {
+          "boundingBox": "377,163,107,25",
+          "words": [
+            {
+              "boundingBox": "377,163,107,25",
+              "text": "Chapathi"
+            }
+          ]
+        },
+        {
+          "boundingBox": "377,200,263,19",
+          "words": [
+            {
+              "boundingBox": "377,201,85,18",
+              "text": "Paneer"
+            },
+            {
+              "boundingBox": "471,201,76,18",
+              "text": "Butter"
+            },
+            {
+              "boundingBox": "557,200,83,19",
+              "text": "Masala"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "353,206,7,195",
+      "lines": [
+        {
+          "boundingBox": "353,206,7,7",
+          "words": [
+            {
+              "boundingBox": "353,206,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "353,281,7,7",
+          "words": [
+            {
+              "boundingBox": "353,281,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "353,394,7,7",
+          "words": [
+            {
+              "boundingBox": "353,394,7,7",
+              "text": "•"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "353,238,140,57",
+      "lines": [
+        {
+          "boundingBox": "353,238,105,19",
+          "words": [
+            {
+              "boundingBox": "353,244,7,7",
+              "text": "•"
+            },
+            {
+              "boundingBox": "376,238,82,19",
+              "text": "A10065"
+            }
+          ]
+        },
+        {
+          "boundingBox": "377,275,116,20",
+          "words": [
+            {
+              "boundingBox": "377,275,57,20",
+              "text": "Plain"
+            },
+            {
+              "boundingBox": "445,275,48,19",
+              "text": "Rice"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "693,169,7,119",
+      "lines": [
+        {
+          "boundingBox": "693,169,7,7",
+          "words": [
+            {
+              "boundingBox": "693,169,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "693,206,7,7",
+          "words": [
+            {
+              "boundingBox": "693,206,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "693,244,7,7",
+          "words": [
+            {
+              "boundingBox": "693,244,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "693,281,7,7",
+          "words": [
+            {
+              "boundingBox": "693,281,7,7",
+              "text": "•"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "377,313,260,137",
+      "lines": [
+        {
+          "boundingBox": "378,313,193,19",
+          "words": [
+            {
+              "boundingBox": "378,313,36,19",
+              "text": "Dal"
+            },
+            {
+              "boundingBox": "424,313,147,19",
+              "text": "Panchamela"
+            }
+          ]
+        },
+        {
+          "boundingBox": "377,350,260,25",
+          "words": [
+            {
+              "boundingBox": "377,350,65,25",
+              "text": "Ridge"
+            },
+            {
+              "boundingBox": "451,350,74,19",
+              "text": "Gourd"
+            },
+            {
+              "boundingBox": "535,350,102,25",
+              "text": "Chutney"
+            }
+          ]
+        },
+        {
+          "boundingBox": "377,388,55,19",
+          "words": [
+            {
+              "boundingBox": "377,388,55,19",
+              "text": "Curd"
+            }
+          ]
+        },
+        {
+          "boundingBox": "377,425,177,25",
+          "words": [
+            {
+              "boundingBox": "377,426,74,18",
+              "text": "Gauva"
+            },
+            {
+              "boundingBox": "460,425,94,25",
+              "text": "Wedges"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "716,48,224,434",
+      "lines": [
+        {
+          "boundingBox": "799,48,96,31",
+          "words": [
+            {
+              "boundingBox": "799,48,96,31",
+              "text": "WED"
+            }
+          ]
+        },
+        {
+          "boundingBox": "798,90,92,32",
+          "words": [
+            {
+              "boundingBox": "798,90,92,32",
+              "text": "AUG"
+            }
+          ]
+        },
+        {
+          "boundingBox": "716,163,66,19",
+          "words": [
+            {
+              "boundingBox": "716,163,66,19",
+              "text": "Wada"
+            }
+          ]
+        },
+        {
+          "boundingBox": "717,200,210,25",
+          "words": [
+            {
+              "boundingBox": "717,201,100,18",
+              "text": "Coconut"
+            },
+            {
+              "boundingBox": "825,200,102,25",
+              "text": "Chutney"
+            }
+          ]
+        },
+        {
+          "boundingBox": "716,238,93,19",
+          "words": [
+            {
+              "boundingBox": "716,238,93,19",
+              "text": "Sambar"
+            }
+          ]
+        },
+        {
+          "boundingBox": "717,275,115,19",
+          "words": [
+            {
+              "boundingBox": "717,275,57,19",
+              "text": "Plain"
+            },
+            {
+              "boundingBox": "785,275,47,19",
+              "text": "Rice"
+            }
+          ]
+        },
+        {
+          "boundingBox": "717,314,223,19",
+          "words": [
+            {
+              "boundingBox": "717,314,76,18",
+              "text": "Carrot"
+            },
+            {
+              "boundingBox": "802,314,55,19",
+              "text": "Corn"
+            },
+            {
+              "boundingBox": "868,314,72,18",
+              "text": "Beans"
+            }
+          ]
+        },
+        {
+          "boundingBox": "718,351,70,24",
+          "words": [
+            {
+              "boundingBox": "718,351,70,24",
+              "text": "Gravy"
+            }
+          ]
+        },
+        {
+          "boundingBox": "716,388,203,25",
+          "words": [
+            {
+              "boundingBox": "716,389,92,18",
+              "text": "Tomato"
+            },
+            {
+              "boundingBox": "818,388,101,25",
+              "text": "Chutney"
+            }
+          ]
+        },
+        {
+          "boundingBox": "717,425,55,19",
+          "words": [
+            {
+              "boundingBox": "717,425,55,19",
+              "text": "Curd"
+            }
+          ]
+        },
+        {
+          "boundingBox": "717,463,187,19",
+          "words": [
+            {
+              "boundingBox": "717,463,119,19",
+              "text": "Chocolate"
+            },
+            {
+              "boundingBox": "846,463,58,19",
+              "text": "Cake"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "1001,48,213,359",
+      "lines": [
+        {
+          "boundingBox": "1110,48,86,31",
+          "words": [
+            {
+              "boundingBox": "1110,48,86,31",
+              "text": "THU"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1110,90,90,31",
+          "words": [
+            {
+              "boundingBox": "1110,90,90,31",
+              "text": "AUG"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1024,163,143,25",
+          "words": [
+            {
+              "boundingBox": "1024,164,49,24",
+              "text": "Veg."
+            },
+            {
+              "boundingBox": "1084,163,83,25",
+              "text": "Biryani"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,169,7,7",
+          "words": [
+            {
+              "boundingBox": "1001,169,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1026,200,188,25",
+          "words": [
+            {
+              "boundingBox": "1026,201,82,24",
+              "text": "Bagara"
+            },
+            {
+              "boundingBox": "1119,200,95,25",
+              "text": "Baingan"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,206,7,7",
+          "words": [
+            {
+              "boundingBox": "1001,206,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1025,238,76,19",
+          "words": [
+            {
+              "boundingBox": "1025,238,76,19",
+              "text": "Raitha"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,244,7,7",
+          "words": [
+            {
+              "boundingBox": "1001,244,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1025,275,116,20",
+          "words": [
+            {
+              "boundingBox": "1025,275,58,20",
+              "text": "Plain"
+            },
+            {
+              "boundingBox": "1093,275,48,19",
+              "text": "Rice"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,281,7,7",
+          "words": [
+            {
+              "boundingBox": "1001,281,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,312,131,26",
+          "words": [
+            {
+              "boundingBox": "1001,319,7,7",
+              "text": "•"
+            },
+            {
+              "boundingBox": "1025,312,107,26",
+              "text": "Chapathi"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1025,350,151,19",
+          "words": [
+            {
+              "boundingBox": "1025,350,37,19",
+              "text": "Dal"
+            },
+            {
+              "boundingBox": "1073,350,103,19",
+              "text": "Makhani"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,356,7,7",
+          "words": [
+            {
+              "boundingBox": "1001,356,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1026,389,89,18",
+          "words": [
+            {
+              "boundingBox": "1026,389,89,18",
+              "text": "Banana"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1001,394,7,7",
+          "words": [
+            {
+              "boundingBox": "1001,394,7,7",
+              "text": "•"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "1331,48,196,396",
+      "lines": [
+        {
+          "boundingBox": "1441,48,57,31",
+          "words": [
+            {
+              "boundingBox": "1441,48,57,31",
+              "text": "FRI"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1437,90,90,31",
+          "words": [
+            {
+              "boundingBox": "1437,90,90,31",
+              "text": "AUG"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,163,132,25",
+          "words": [
+            {
+              "boundingBox": "1331,169,7,7",
+              "text": "•"
+            },
+            {
+              "boundingBox": "1355,163,108,25",
+              "text": "Chapathi"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1356,200,164,19",
+          "words": [
+            {
+              "boundingBox": "1356,200,66,19",
+              "text": "Kadhi"
+            },
+            {
+              "boundingBox": "1432,200,88,19",
+              "text": "Pakoda"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,206,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,206,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1354,239,168,24",
+          "words": [
+            {
+              "boundingBox": "1354,239,50,24",
+              "text": "Veg."
+            },
+            {
+              "boundingBox": "1414,239,31,18",
+              "text": "Do"
+            },
+            {
+              "boundingBox": "1455,239,67,24",
+              "text": "Pyaza"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,244,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,244,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1356,275,115,19",
+          "words": [
+            {
+              "boundingBox": "1356,275,57,19",
+              "text": "Plain"
+            },
+            {
+              "boundingBox": "1424,275,47,19",
+              "text": "Rice"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,281,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,281,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1354,313,140,19",
+          "words": [
+            {
+              "boundingBox": "1354,314,93,18",
+              "text": "Tomato"
+            },
+            {
+              "boundingBox": "1457,313,37,19",
+              "text": "Dal"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,319,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,319,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1356,350,73,25",
+          "words": [
+            {
+              "boundingBox": "1356,350,73,25",
+              "text": "Papad"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,356,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,356,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1355,388,56,19",
+          "words": [
+            {
+              "boundingBox": "1355,388,56,19",
+              "text": "Curd"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,394,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,394,7,7",
+              "text": "•"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1355,425,158,19",
+          "words": [
+            {
+              "boundingBox": "1355,426,77,18",
+              "text": "Carrot"
+            },
+            {
+              "boundingBox": "1441,425,72,19",
+              "text": "Halwa"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1331,431,7,7",
+          "words": [
+            {
+              "boundingBox": "1331,431,7,7",
+              "text": "•"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
