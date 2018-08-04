@@ -23,6 +23,7 @@ namespace OCR.Classes
 
         public async Task<string> GetMenuByDay(string WeekDay)
         {
+            WeekDay = WeekDay.ToUpper();
             List<string> dayMenu = new List<string>();
             List<string> fullMenu = await GetLunchMenuAsync();
             bool startLogging = false;
