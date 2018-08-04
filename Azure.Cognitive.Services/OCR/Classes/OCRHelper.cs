@@ -25,26 +25,34 @@ namespace OCR.Classes
         {
             WeekDay = WeekDay.ToUpper();
             List<string> dayMenu = new List<string>();
-            List<string> fullMenu = await GetLunchMenuAsync();
             bool startLogging = false;
             List<string> weekDayNames = new List<string> {"MON", "TUE", "WED", "THU", "FRI"};
-
-            fullMenu.ForEach(m => {
-                if (m.Equals(WeekDay, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    startLogging = true;
-                    weekDayNames.Remove(WeekDay);
-                }
-                if (weekDayNames.Contains(m.ToUpper()))
-                {
-                    startLogging = false;
-                }
-                if (startLogging)
-                {
-                    dayMenu.Add(m);
-                }
-            });
-            return string.Join("," , dayMenu.Select(o=>o));
+            string retVal = String.Empty;
+            try
+            {
+                List<string> fullMenu = await GetLunchMenuAsync();
+                fullMenu.ForEach(m => {
+                    if (m.Equals(WeekDay, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        startLogging = true;
+                        weekDayNames.Remove(WeekDay);
+                    }
+                    if (weekDayNames.Contains(m.ToUpper()))
+                    {
+                        startLogging = false;
+                    }
+                    if (startLogging)
+                    {
+                        dayMenu.Add(m);
+                    }
+                });
+                retVal = string.Join(",", dayMenu.Select(o => o));
+            }
+            catch (Exception exp)
+            {
+                retVal = "An error occurred in processing this request. " + exp.Message;
+            }
+            return retVal;
         }
 
         private async Task<List<string>> GetLunchMenuAsync()
@@ -101,7 +109,6 @@ namespace OCR.Classes
             }
             catch (Exception e)
             {
-                Debug.WriteLine("\n" + e.Message);
                 throw;
             }
             return retVal;
