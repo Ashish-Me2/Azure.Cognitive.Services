@@ -47,6 +47,8 @@ namespace OCR.Classes
                     }
                 });
                 retVal = string.Join(",", dayMenu.Select(o => o));
+                retVal = retVal.Substring(retVal.IndexOf(",") + 1,retVal.Length- retVal.IndexOf(",")-1);
+                retVal = retVal.Substring(retVal.IndexOf(",") + 1, retVal.Length - retVal.IndexOf(",") - 1);
             }
             catch (Exception exp)
             {

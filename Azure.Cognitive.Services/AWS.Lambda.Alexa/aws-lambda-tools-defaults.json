@@ -7,15 +7,15 @@
         "All the command line options for the Lambda command can be specified in this file."
     ],
     "profile"     : "Ashish Default Profile",
-    "region"      : "us-west-2",
+    "region"      : "us-east-1",
     "configuration" : "Debug",
     "framework"     : "netcoreapp2.0",
     "function-runtime" : "dotnetcore2.0",
     "function-memory-size" : 256,
     "function-timeout"     : 30,
-    "function-handler"     : "AWS.Lambda.Alexa::AWS.Lambda.Alexa.LunchMenuHandler::FunctionHandler",
-    "function-name"        : "FunctionHandler",
+    "function-handler"     : "AWS.Lambda.Alexa::AWS.Lambda.Alexa.LunchMenuHandler::MenuHandler",
+    "function-name"        : "ChirecMenuHandler",
     "function-role"        : "arn:aws:iam::833530178943:role/lambda_exec_FunctionHandler",
-    "tracing-mode"         : "PassThrough",
+    "tracing-mode"         : "Active",
     "environment-variables" : ""
 }
