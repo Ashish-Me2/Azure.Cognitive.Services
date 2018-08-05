@@ -26,7 +26,7 @@ namespace AWS.Lambda.Alexa
             enINResource.HelpReprompt = "You can say tell me the lunch menu for Monday to get started";
             //enINResource.StopMessage = "Enjoy your lunch...";
             enINResource.StopMessage = String.Empty;
-            enINResource.Facts.Add("Uff. Kyaa keh rahe ho yaar...");
+            //enINResource.Facts.Add("Uff. Kyaa keh rahe ho yaar...");
             resources.Add(enINResource);
             return resources;
         }
@@ -78,20 +78,16 @@ namespace AWS.Lambda.Alexa
                         innerResponse = new PlainTextOutputSpeech();
                         (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         break;
-                    case "GetFactIntent":
-                        log.LogLine($"GetFactIntent sent: send fact");
-                        innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = emitNewFact(resource, false);
-                        break;
                     case "GetMenu":
                         log.LogLine($"GetFactIntent sent: Get Menu with slot value:" + (intentRequest.Intent.Slots["weekday"].Value));
                         innerResponse = new PlainTextOutputSpeech();
                         (innerResponse as PlainTextOutputSpeech).Text = GetMenuItems(intentRequest.Intent.Slots["weekday"].Value).Result;
+                        response.Response.ShouldEndSession = true;
                         break;
                     default:
                         log.LogLine($"Unknown intent: " + intentRequest.Intent.Name);
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = emitNewFact(resource, false);
+                        (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         break;
                 }
             }
@@ -106,7 +102,27 @@ namespace AWS.Lambda.Alexa
         public async Task<string> GetMenuItems(string weekDay)
         {
             ExtServiceHelper service = new ExtServiceHelper();
-            string menu = "The menu for " + weekDay + " is " + await service.GetDataFromService("https://ocrserviceapi.azurewebsites.net/", "api/ocr?Weekday=", new List<object> { weekDay });
+            string _weekDay = String.Empty;
+            List<string> weekDayNames = new List<string> { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY" };
+            if (!weekDayNames.Contains(weekDay.ToUpper()))
+            {
+                weekDay = null;
+            }
+            if (String.IsNullOrEmpty(weekDay))
+            {
+                DateTime today = DateTime.Now;
+                _weekDay = today.AddDays(1).DayOfWeek.ToString().ToUpper();
+                if ((_weekDay.Equals("SATURDAY") || (_weekDay.Equals("SUNDAY"))))
+                {
+                    _weekDay = "MONDAY";
+                }
+            }
+            else
+            {
+                _weekDay = weekDay;
+            }
+
+            string menu = "The menu for " + _weekDay + " is " + await service.GetDataFromService("https://ocrserviceapi.azurewebsites.net/", "api/ocr?Weekday=", new List<object> { _weekDay });
             return menu;
         }
 

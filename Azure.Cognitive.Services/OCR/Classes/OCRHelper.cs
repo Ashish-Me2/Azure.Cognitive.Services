@@ -97,7 +97,7 @@ namespace OCR.Classes
                     string uri = uriBase + "?" + requestParameters;
                     HttpResponseMessage response;
 
-                    byte[] byteData = await DownloadImage(lunchMenuUri);
+                    byte[] byteData = CheckAndDownloadMenu();
 
                     using (ByteArrayContent content = new ByteArrayContent(byteData))
                     {
@@ -116,6 +116,25 @@ namespace OCR.Classes
             return retVal;
         }
 
+        private byte[] CheckAndDownloadMenu()
+        {
+            byte[] byteData = null;
+            CacheManager cache = CacheManager.GetInstance();
+            DateTime menuTimeStamp = (DateTime)cache.GetItem("MENU_REFRESH_TIME");
+            if (DateTime.Now.Subtract(menuTimeStamp).TotalDays > 1)
+            {
+                Utility util = new Utility();
+                byteData = util.DownloadImage(lunchMenuUri).Result;
+                cache.SetItem("MENU_IMAGE", byteData);
+                cache.SetItem("MENU_REFRESH_TIME", DateTime.Now);
+            }
+            else
+            {
+                byteData = (cache.GetItem("MENU_IMAGE") != null) ? (byte[])cache.GetItem("MENU_IMAGE") : null;
+            }
+            return byteData;
+        }
+
         private byte[] GetImageAsByteArray(string imageFilePath)
         {
             using (FileStream fileStream = new FileStream(System.Web.Hosting.HostingEnvironment.MapPath(imageFilePath), FileMode.Open, FileAccess.Read))
@@ -123,16 +142,6 @@ namespace OCR.Classes
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 return binaryReader.ReadBytes((int)fileStream.Length);
             }
-        }
-
-        private async Task<byte[]> DownloadImage(string ImageUri)
-        {
-            byte[] byteData = null;
-            using (HttpClient client = new HttpClient())
-            {
-                byteData = await client.GetByteArrayAsync(ImageUri);
-            }
-            return byteData;
         }
     }
 }
