@@ -16,6 +16,7 @@ namespace AWS.Lambda.Alexa
 {
     public class LunchMenuHandler
     {
+        ILambdaLogger log = null;
         public List<FactResource> GetResources()
         {
             List<FactResource> resources = new List<FactResource>();
@@ -42,7 +43,7 @@ namespace AWS.Lambda.Alexa
             response.Response = new ResponseBody();
             response.Response.ShouldEndSession = false;
             IOutputSpeech innerResponse = null;
-            var log = context.Logger;
+            log = context.Logger;
             log.LogLine($"Skill Request Object:");
             log.LogLine(JsonConvert.SerializeObject(input));
 
@@ -59,6 +60,10 @@ namespace AWS.Lambda.Alexa
             else if (input.GetRequestType() == typeof(IntentRequest))
             {
                 var intentRequest = (IntentRequest)input.Request;
+                log.LogLine("----------------------------------------------------------");
+                log.LogLine("Intent Resolver: " + intentRequest.Intent.Name + ", " + intentRequest.Intent.Slots["weekday"].Value);
+                log.LogLine("----------------------------------------------------------");
+
                 switch (intentRequest.Intent.Name)
                 {
                     case "AMAZON.CancelIntent":
@@ -88,6 +93,7 @@ namespace AWS.Lambda.Alexa
                         log.LogLine($"Unknown intent: " + intentRequest.Intent.Name);
                         innerResponse = new PlainTextOutputSpeech();
                         (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
+                        response.Response.ShouldEndSession = true;
                         break;
                 }
             }
@@ -104,7 +110,7 @@ namespace AWS.Lambda.Alexa
             ExtServiceHelper service = new ExtServiceHelper();
             string _weekDay = String.Empty;
             List<string> weekDayNames = new List<string> { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY" };
-            if (!weekDayNames.Contains(weekDay.ToUpper()))
+            if ((String.IsNullOrEmpty(weekDay))||(!weekDayNames.Contains(weekDay.ToUpper())))
             {
                 weekDay = null;
             }
@@ -121,8 +127,8 @@ namespace AWS.Lambda.Alexa
             {
                 _weekDay = weekDay;
             }
-
             string menu = "The menu for " + _weekDay + " is " + await service.GetDataFromService("https://ocrserviceapi.azurewebsites.net/", "api/ocr?Weekday=", new List<object> { _weekDay });
+            log.LogLine($"Ext API Response: " + menu);
             return menu;
         }
 
