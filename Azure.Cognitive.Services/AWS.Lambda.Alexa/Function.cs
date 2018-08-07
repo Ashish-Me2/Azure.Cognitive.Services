@@ -60,8 +60,9 @@ namespace AWS.Lambda.Alexa
             else if (input.GetRequestType() == typeof(IntentRequest))
             {
                 var intentRequest = (IntentRequest)input.Request;
+                var slotValue = intentRequest.Intent.Slots["weekday"].Value;
                 log.LogLine("----------------------------------------------------------");
-                log.LogLine("Intent Resolver: " + intentRequest.Intent.Name + ", " + intentRequest.Intent.Slots["weekday"].Value);
+                log.LogLine("Intent Resolver: " + intentRequest.Intent.Name + ", " + slotValue);
                 log.LogLine("----------------------------------------------------------");
 
                 switch (intentRequest.Intent.Name)
@@ -84,9 +85,11 @@ namespace AWS.Lambda.Alexa
                         (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         break;
                     case "GetMenu":
-                        log.LogLine($"GetFactIntent sent: Get Menu with slot value:" + (intentRequest.Intent.Slots["weekday"].Value));
+                        slotValue = (slotValue.Equals("tomorrow", StringComparison.CurrentCultureIgnoreCase)) ? DateTime.Now.AddDays(1).DayOfWeek.ToString() : slotValue;
+                        slotValue = (slotValue.Equals("today", StringComparison.CurrentCultureIgnoreCase)) ? DateTime.Now.DayOfWeek.ToString() : slotValue;
+                        log.LogLine($"GetMenuIntent sent: Get Menu with slot value:" + slotValue);
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = GetMenuItems(intentRequest.Intent.Slots["weekday"].Value).Result;
+                        (innerResponse as PlainTextOutputSpeech).Text = GetMenuItems(slotValue).Result;
                         response.Response.ShouldEndSession = true;
                         break;
                     default:
