@@ -225,9 +225,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Models\menu.json" />
-    <None Include="Properties\PublishProfiles\ocrserviceapi - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\ocrserviceapi - Web Deploy1.pubxml" />
-    <None Include="Properties\PublishProfiles\ocrserviceapi - Web Deploy2.pubxml" />
+    <None Include="Properties\PublishProfiles\OcrApiService - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

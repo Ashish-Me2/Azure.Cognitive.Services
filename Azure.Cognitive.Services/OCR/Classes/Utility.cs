@@ -14,7 +14,7 @@ namespace OCR.Classes
             byte[] byteData = null;
             using (HttpClient client = new HttpClient())
             {
-                byteData = await client.GetByteArrayAsync(ImageUri);
+                byteData = await client.GetByteArrayAsync(ImageUri).ConfigureAwait(false);
             }
             return byteData;
         }

@@ -87,26 +87,36 @@ namespace OCR.Classes
         private async Task<LunchMenuModel> ResolveTextAsync()
         {
             LunchMenuModel retVal = null;
+            CacheManager cache = CacheManager.GetInstance();
             try
             {
-                using (HttpClient client = new HttpClient())
+                if ((cache.GetItem("MENU_OBJECT") != null) && (DateTime.Now.Subtract((DateTime)cache.GetItem("MENU_OBJECT_REFRESH_TIME")).TotalDays <= 1))
                 {
-                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
-
-                    string requestParameters = "language=unk&detectOrientation=true";
-                    string uri = uriBase + "?" + requestParameters;
-                    HttpResponseMessage response;
-
-                    byte[] byteData = CheckAndDownloadMenu();
-
-                    using (ByteArrayContent content = new ByteArrayContent(byteData))
+                    retVal = (LunchMenuModel)cache.GetItem("MENU_OBJECT");
+                }
+                else
+                {
+                    using (HttpClient client = new HttpClient())
                     {
-                        content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                        response = await client.PostAsync(uri, content);
-                    }
+                        client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
 
-                    string contentString = await response.Content.ReadAsStringAsync();
-                    retVal = JsonConvert.DeserializeObject<LunchMenuModel>(JToken.Parse(contentString).ToString());
+                        string requestParameters = "language=unk&detectOrientation=true";
+                        string uri = uriBase + "?" + requestParameters;
+                        HttpResponseMessage response;
+
+                        byte[] byteData = CheckAndDownloadMenu().Result;
+
+                        using (ByteArrayContent content = new ByteArrayContent(byteData))
+                        {
+                            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                            response = await client.PostAsync(uri, content);
+                        }
+                        string contentString = await response.Content.ReadAsStringAsync();
+                        retVal = JsonConvert.DeserializeObject<LunchMenuModel>(JToken.Parse(contentString).ToString());
+                    }
+                    //Set the final resolved entity into the Cache
+                    cache.SetItem("MENU_OBJECT", retVal);
+                    cache.SetItem("MENU_OBJECT_REFRESH_TIME", DateTime.Now);
                 }
             }
             catch (Exception e)
@@ -116,22 +126,11 @@ namespace OCR.Classes
             return retVal;
         }
 
-        private byte[] CheckAndDownloadMenu()
+        private async Task<byte[]> CheckAndDownloadMenu()
         {
             byte[] byteData = null;
-            CacheManager cache = CacheManager.GetInstance();
-            DateTime menuTimeStamp = (DateTime)cache.GetItem("MENU_REFRESH_TIME");
-            if (DateTime.Now.Subtract(menuTimeStamp).TotalDays > 1)
-            {
-                Utility util = new Utility();
-                byteData = util.DownloadImage(lunchMenuUri).Result;
-                cache.SetItem("MENU_IMAGE", byteData);
-                cache.SetItem("MENU_REFRESH_TIME", DateTime.Now);
-            }
-            else
-            {
-                byteData = (cache.GetItem("MENU_IMAGE") != null) ? (byte[])cache.GetItem("MENU_IMAGE") : null;
-            }
+            Utility util = new Utility();
+            byteData = await util.DownloadImage(lunchMenuUri).ConfigureAwait(false);
             return byteData;
         }
 

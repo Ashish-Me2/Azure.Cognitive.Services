@@ -17,6 +17,7 @@ namespace AWS.Lambda.Alexa
     public class LunchMenuHandler
     {
         ILambdaLogger log = null;
+        string webApiUri = "https://ocrapiservice.azurewebsites.net/api/ocr/GetMenu?Weekday=";
         public List<FactResource> GetResources()
         {
             List<FactResource> resources = new List<FactResource>();
@@ -146,8 +147,8 @@ namespace AWS.Lambda.Alexa
 
             if (QueryNeeded)
             {
-                log.LogLine($"API Request: " + "https://ocrserviceapi.azurewebsites.net/api/ocr?Weekday=" + _weekDay);
-                string response = await service.GetDataFromService("https://ocrserviceapi.azurewebsites.net/", "api/ocr?Weekday=", new List<object> { _weekDay });
+                log.LogLine($"API Request: " + webApiUri + _weekDay);
+                string response = await service.GetDataFromService(webApiUri, new List<object> { _weekDay });
                 menu = "The menu for " + _weekDay + " is " + response;
             }
             log.LogLine($"Final Response: " + menu);
