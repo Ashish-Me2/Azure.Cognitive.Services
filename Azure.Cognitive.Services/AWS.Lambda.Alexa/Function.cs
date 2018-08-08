@@ -24,7 +24,7 @@ namespace AWS.Lambda.Alexa
             enINResource.SkillName = "Chirec School Lunch Menu";
             enINResource.GetFactMessage = "Here's your requested menu: ";
             enINResource.HelpMessage = "You can say what's in lunch for Monday, or, you can say exit... What can I help you with?";
-            enINResource.HelpReprompt = "You can say tell me the lunch menu for Monday to get started";
+            enINResource.HelpReprompt = "You can say, Alexa, ask Menu, what's for lunch on Monday to get started";
             //enINResource.StopMessage = "Enjoy your lunch...";
             enINResource.StopMessage = String.Empty;
             //enINResource.Facts.Add("Uff. Kyaa keh rahe ho yaar...");
@@ -54,13 +54,13 @@ namespace AWS.Lambda.Alexa
             {
                 log.LogLine($"Default LaunchRequest made: 'Alexa, ask School Lunch Menu");
                 innerResponse = new PlainTextOutputSpeech();
-                (innerResponse as PlainTextOutputSpeech).Text = emitNewFact(resource, true);
+                (innerResponse as PlainTextOutputSpeech).Text = resource.HelpReprompt;
 
             }
             else if (input.GetRequestType() == typeof(IntentRequest))
             {
                 var intentRequest = (IntentRequest)input.Request;
-                var slotValue = intentRequest.Intent.Slots["weekday"].Value;
+                string slotValue = (intentRequest.Intent.Slots["weekday"].Value==null)? String.Empty: (intentRequest.Intent.Slots["weekday"].Value);
                 log.LogLine("----------------------------------------------------------");
                 log.LogLine("Intent Resolver: " + intentRequest.Intent.Name + ", " + slotValue);
                 log.LogLine("----------------------------------------------------------");
@@ -112,6 +112,8 @@ namespace AWS.Lambda.Alexa
         {
             ExtServiceHelper service = new ExtServiceHelper();
             string _weekDay = String.Empty;
+            string menu = String.Empty;
+            bool QueryNeeded = true;
             List<string> weekDayNames = new List<string> { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY" };
             if ((String.IsNullOrEmpty(weekDay))||(!weekDayNames.Contains(weekDay.ToUpper())))
             {
@@ -119,6 +121,7 @@ namespace AWS.Lambda.Alexa
             }
             if (String.IsNullOrEmpty(weekDay))
             {
+                log.LogLine($"Weekday slot value is: NULL");
                 DateTime today = DateTime.Now;
                 _weekDay = today.AddDays(1).DayOfWeek.ToString().ToUpper();
                 if ((_weekDay.Equals("SATURDAY") || (_weekDay.Equals("SUNDAY"))))
@@ -128,10 +131,26 @@ namespace AWS.Lambda.Alexa
             }
             else
             {
-                _weekDay = weekDay;
+                if ((weekDay.Equals("SATURDAY", StringComparison.CurrentCultureIgnoreCase) || (weekDay.Equals("SUNDAY", StringComparison.CurrentCultureIgnoreCase))))
+                {
+                    log.LogLine($"External API query not required. Sending a standard response...");
+                    menu = "Chirec doesn't provide school lunch on Saturdays and Sundays. Try asking the menu for a weekday instead...";
+                    QueryNeeded = false;
+                    
+                }
+                else
+                {
+                    _weekDay = weekDay;
+                }
             }
-            string menu = "The menu for " + _weekDay + " is " + await service.GetDataFromService("https://ocrserviceapi.azurewebsites.net/", "api/ocr?Weekday=", new List<object> { _weekDay });
-            log.LogLine($"Ext API Response: " + menu);
+
+            if (QueryNeeded)
+            {
+                log.LogLine($"API Request: " + "https://ocrserviceapi.azurewebsites.net/api/ocr?Weekday=" + _weekDay);
+                string response = await service.GetDataFromService("https://ocrserviceapi.azurewebsites.net/", "api/ocr?Weekday=", new List<object> { _weekDay });
+                menu = "The menu for " + _weekDay + " is " + response;
+            }
+            log.LogLine($"Final Response: " + menu);
             return menu;
         }
 
