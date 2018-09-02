@@ -61,9 +61,9 @@ namespace AWS.Lambda.Alexa
             else if (input.GetRequestType() == typeof(IntentRequest))
             {
                 var intentRequest = (IntentRequest)input.Request;
-                string slotValue = (intentRequest.Intent.Slots["weekday"].Value==null)? String.Empty: (intentRequest.Intent.Slots["weekday"].Value);
+                
                 log.LogLine("----------------------------------------------------------");
-                log.LogLine("Intent Resolver: " + intentRequest.Intent.Name + ", " + slotValue);
+                log.LogLine("Intent Resolver: " + intentRequest.Intent.Name);
                 log.LogLine("----------------------------------------------------------");
 
                 switch (intentRequest.Intent.Name)
@@ -86,11 +86,26 @@ namespace AWS.Lambda.Alexa
                         (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         break;
                     case "GetMenu":
+                        string slotValue = String.Empty;
+                        if (intentRequest.Intent.Slots.Count > 0)
+                        {
+                            slotValue = (intentRequest.Intent.Slots["weekday"].Value == null) ? String.Empty : (intentRequest.Intent.Slots["weekday"].Value);
+                        }
+                        else
+                        {
+                            slotValue = "today";
+                        }
                         slotValue = (slotValue.Equals("tomorrow", StringComparison.CurrentCultureIgnoreCase)) ? DateTime.Now.AddDays(1).DayOfWeek.ToString() : slotValue;
                         slotValue = (slotValue.Equals("today", StringComparison.CurrentCultureIgnoreCase)) ? DateTime.Now.DayOfWeek.ToString() : slotValue;
                         log.LogLine($"GetMenuIntent sent: Get Menu with slot value:" + slotValue);
                         innerResponse = new PlainTextOutputSpeech();
                         (innerResponse as PlainTextOutputSpeech).Text = GetMenuItems(slotValue).Result;
+                        response.Response.ShouldEndSession = true;
+                        break;
+                    case "AMAZON.FallbackIntent":
+                        log.LogLine($"AMAZON.FallbackIntent: send HelpMessage");
+                        innerResponse = new PlainTextOutputSpeech();
+                        (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         response.Response.ShouldEndSession = true;
                         break;
                     default:
@@ -124,8 +139,8 @@ namespace AWS.Lambda.Alexa
             {
                 log.LogLine($"Weekday slot value is: NULL");
                 DateTime today = DateTime.Now;
-                _weekDay = today.AddDays(1).DayOfWeek.ToString().ToUpper();
-                if ((_weekDay.Equals("SATURDAY") || (_weekDay.Equals("SUNDAY"))))
+                _weekDay = today.DayOfWeek.ToString().ToUpper();
+                if ((_weekDay.Equals("SATURDAY", StringComparison.CurrentCultureIgnoreCase) || (_weekDay.Equals("SUNDAY", StringComparison.CurrentCultureIgnoreCase))))
                 {
                     _weekDay = "MONDAY";
                 }
