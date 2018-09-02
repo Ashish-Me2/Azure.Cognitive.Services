@@ -90,7 +90,7 @@ namespace OCR.Classes
             CacheManager cache = CacheManager.GetInstance();
             try
             {
-                if ((cache.GetItem("MENU_OBJECT") != null) && (DateTime.Now.Subtract((DateTime)cache.GetItem("MENU_OBJECT_REFRESH_TIME")).TotalDays <= 1))
+                if ((cache.GetItem("MENU_OBJECT") != null) && (DateTime.Now.Subtract((DateTime)cache.GetItem("MENU_OBJECT_REFRESH_TIME")).Hours <= 6))
                 {
                     retVal = (LunchMenuModel)cache.GetItem("MENU_OBJECT");
                 }
