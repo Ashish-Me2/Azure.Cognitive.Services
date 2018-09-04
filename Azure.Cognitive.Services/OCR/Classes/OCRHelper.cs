@@ -12,6 +12,7 @@ using System.Web;
 using OCR.Models;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading;
 
 namespace OCR.Classes
 {
@@ -84,6 +85,15 @@ namespace OCR.Classes
             return WeekMenu;
         }
 
+        public async void ResolveMenu()
+        {
+            while (true)
+            {
+                await ResolveTextAsync();
+                Thread.Sleep(14400 * 1000);
+            }
+        }
+
         private async Task<LunchMenuModel> ResolveTextAsync()
         {
             LunchMenuModel retVal = null;
@@ -96,33 +106,39 @@ namespace OCR.Classes
                 }
                 else
                 {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
-
-                        string requestParameters = "language=unk&detectOrientation=true";
-                        string uri = uriBase + "?" + requestParameters;
-                        HttpResponseMessage response;
-
-                        byte[] byteData = CheckAndDownloadMenu().Result;
-
-                        using (ByteArrayContent content = new ByteArrayContent(byteData))
-                        {
-                            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                            response = await client.PostAsync(uri, content);
-                        }
-                        string contentString = await response.Content.ReadAsStringAsync();
-                        retVal = JsonConvert.DeserializeObject<LunchMenuModel>(JToken.Parse(contentString).ToString());
-                    }
-                    //Set the final resolved entity into the Cache
-                    cache.SetItem("MENU_OBJECT", retVal);
-                    cache.SetItem("MENU_OBJECT_REFRESH_TIME", DateTime.Now);
+                    retVal = await QueryLiveMenu(retVal, cache);
                 }
             }
             catch (Exception e)
             {
                 throw;
             }
+            return retVal;
+        }
+
+        private async Task<LunchMenuModel> QueryLiveMenu(LunchMenuModel retVal, CacheManager cache)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+
+                string requestParameters = "language=unk&detectOrientation=true";
+                string uri = uriBase + "?" + requestParameters;
+                HttpResponseMessage response;
+
+                byte[] byteData = CheckAndDownloadMenu().Result;
+
+                using (ByteArrayContent content = new ByteArrayContent(byteData))
+                {
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                    response = await client.PostAsync(uri, content);
+                }
+                string contentString = await response.Content.ReadAsStringAsync();
+                retVal = JsonConvert.DeserializeObject<LunchMenuModel>(JToken.Parse(contentString).ToString());
+            }
+            //Set the final resolved entity into the Cache
+            cache.SetItem("MENU_OBJECT", retVal);
+            cache.SetItem("MENU_OBJECT_REFRESH_TIME", DateTime.Now);
             return retVal;
         }
 

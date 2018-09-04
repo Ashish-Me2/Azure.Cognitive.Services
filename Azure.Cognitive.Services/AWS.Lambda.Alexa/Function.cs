@@ -25,7 +25,7 @@ namespace AWS.Lambda.Alexa
             enINResource.SkillName = "Chirec School Lunch Menu";
             enINResource.GetFactMessage = "Here's your requested menu: ";
             enINResource.HelpMessage = "You can say what's in lunch for Monday, or, you can say exit... What can I help you with?";
-            enINResource.HelpReprompt = "You can say, Alexa, ask Menu, what's for lunch on Monday to get started";
+            enINResource.HelpReprompt = "To get started, you can say, Alexa, ask school menu, what's for lunch on Monday";
             //enINResource.StopMessage = "Enjoy your lunch...";
             enINResource.StopMessage = String.Empty;
             //enINResource.Facts.Add("Uff. Kyaa keh rahe ho yaar...");
@@ -100,12 +100,6 @@ namespace AWS.Lambda.Alexa
                         log.LogLine($"GetMenuIntent sent: Get Menu with slot value:" + slotValue);
                         innerResponse = new PlainTextOutputSpeech();
                         (innerResponse as PlainTextOutputSpeech).Text = GetMenuItems(slotValue).Result;
-                        response.Response.ShouldEndSession = true;
-                        break;
-                    case "AMAZON.FallbackIntent":
-                        log.LogLine($"AMAZON.FallbackIntent: send HelpMessage");
-                        innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         response.Response.ShouldEndSession = true;
                         break;
                     default:
