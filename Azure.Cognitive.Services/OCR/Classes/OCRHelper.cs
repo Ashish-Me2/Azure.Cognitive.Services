@@ -66,17 +66,61 @@ namespace OCR.Classes
             try
             {
                 LunchMenuModel lunchMenu = await ResolveTextAsync().ConfigureAwait(false);
+                Dictionary<string, List<Word>> boundingboxWords = new Dictionary<string, List<Word>>();
 
-                lunchMenu.Regions.ForEach(r => {
-                    r.Lines.ForEach(l => {
+                lunchMenu.Regions.ForEach(r =>
+                {
+                    r.Lines.ForEach(l =>
+                    {
+                        //--- Bounding Box Processing ---
+                        
+                         boundingboxWords.Add(l.BoundingBox, l.Words);
+                        
+                        
+                        //------------------------------------------------------------------------------------------
                         string result = string.Join(" ", (l.Words.Select(s => s.Text))).Replace("•", "").Trim();
                         if (result.Length > 0)
                         {
                             WeekMenu.Add(result);
                         }
+                        //------------------------------------------------------------------------------------------
+                      //  Console.WriteLine("-- LINE --");
                     });
+                   // Console.WriteLine("-- REGION --");
                 });
                 WeekMenu.RemoveAt(WeekMenu.Count - 1);
+
+                //--- Bounding Box Processing ---
+                Dictionary<Tuple<int,int>, Object> BBWordsArranged = new Dictionary<Tuple<int, int>, Object>();
+                List<int> arrangedLines = new List<int>();
+
+                boundingboxWords.Keys.ToList().ForEach(k =>
+                {
+                    Tuple<int,int> boxCoords = new Tuple<int, int>(Convert.ToInt32(k.Split(",".ToCharArray())[0].ToString()), Convert.ToInt32(k.Split(",".ToCharArray())[1].ToString()));
+                    if (BBWordsArranged.ContainsKey(boxCoords))
+                    {
+                        BBWordsArranged[boxCoords] = boundingboxWords[k];
+                    }
+                    else
+                    {
+                        BBWordsArranged.Add(boxCoords, boundingboxWords[k]);
+                    }
+                });
+
+                //BBWordsArranged.Keys.Select(k => k).OrderBy(k => k).ToList().ForEach(y =>
+                //{
+                //    arrangedLines.Add(y);
+                //});
+
+                BBWordsArranged.Keys.Select(k => k).OrderBy(j => j.Item1).ThenBy(j=>j.Item2).ToList().ForEach(f =>
+                {
+                    ((List<Word>)BBWordsArranged[f]).ForEach(w => {
+                        Console.WriteLine(w.Text + ", ");
+                    });
+                    
+                });
+
+                //-------------------------------
             }
             catch (Exception exp)
             {
