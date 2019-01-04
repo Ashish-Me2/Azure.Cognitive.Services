@@ -66,15 +66,18 @@ namespace OCR.Classes
             try
             {
                 LunchMenuModel lunchMenu = await ResolveTextAsync().ConfigureAwait(false);
-                Dictionary<string, List<Word>> boundingboxWords = new Dictionary<string, List<Word>>();
+                Dictionary<string, Word> boundingboxWords = new Dictionary<string, Word>();
 
                 lunchMenu.Regions.ForEach(r =>
                 {
                     r.Lines.ForEach(l =>
                     {
                         //--- Bounding Box Processing ---
+
+                        l.Words.ForEach(w => {
+                            boundingboxWords.Add(w.BoundingBox, w);
+                        });
                         
-                         boundingboxWords.Add(l.BoundingBox, l.Words);
                         
                         
                         //------------------------------------------------------------------------------------------
@@ -107,17 +110,25 @@ namespace OCR.Classes
                     }
                 });
 
-                //BBWordsArranged.Keys.Select(k => k).OrderBy(k => k).ToList().ForEach(y =>
-                //{
-                //    arrangedLines.Add(y);
-                //});
 
-                BBWordsArranged.Keys.Select(k => k).OrderBy(j => j.Item1).ThenBy(j=>j.Item2).ToList().ForEach(f =>
+                Dictionary<int, string> Lines = new Dictionary<int, string>();
+
+                BBWordsArranged.Keys.Select(k => k).OrderBy(j => j.Item2).ThenBy(j=>j.Item1).ToList().ForEach(f =>
                 {
-                    ((List<Word>)BBWordsArranged[f]).ForEach(w => {
-                        Console.WriteLine(w.Text + ", ");
+                    bool assimilated = false;
+                    Lines.Keys.ToList().ForEach(l => {
+                        if (Math.Abs(l- f.Item2) <= 5)
+                        {
+                            Lines[l] = Lines[l] + "-" + ((Word)BBWordsArranged[f]).Text;
+                            assimilated = true;
+                            
+                        }
                     });
-                    
+                    if (!assimilated)
+                    {
+                        Lines.Add(f.Item2, ((Word)BBWordsArranged[f]).Text);
+                    }
+                    //Console.WriteLine(((Word)BBWordsArranged[f]).Text + " - (" + f.Item1 + "," + f.Item2 + ")");
                 });
 
                 //-------------------------------
