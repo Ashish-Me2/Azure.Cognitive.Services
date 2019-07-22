@@ -184,6 +184,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Classes\CacheManager.cs" />
     <Compile Include="Classes\OCRHelper.cs" />
+    <Compile Include="Classes\RecognitionResults.cs" />
     <Compile Include="Classes\Utility.cs" />
     <Compile Include="Controllers\OCRController.cs" />
     <Compile Include="Global.asax.cs">
@@ -225,6 +226,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Models\menu.json" />
+    <Content Include="Classes\json.json" />
     <None Include="Properties\PublishProfiles\OcrApiService - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

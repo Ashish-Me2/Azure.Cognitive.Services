@@ -91,7 +91,7 @@ namespace OCR.Classes
                     });
                    // Console.WriteLine("-- REGION --");
                 });
-                WeekMenu.RemoveAt(WeekMenu.Count - 1);
+                //WeekMenu.RemoveAt(WeekMenu.Count - 1);
 
                 //--- Bounding Box Processing ---
                 Dictionary<Tuple<int,int>, Object> BBWordsArranged = new Dictionary<Tuple<int, int>, Object>();
