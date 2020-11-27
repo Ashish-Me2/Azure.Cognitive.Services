@@ -12,7 +12,7 @@ namespace Harness
     {
         static void Main(string[] args)
         {
-            GetData("Monday");
+            GetData("Friday");
             Console.WriteLine("Press ENTER to quit");
             Console.ReadLine();
         }

@@ -31,24 +31,25 @@ namespace OCR.Classes
             try
             {
                 List<string> fullMenu = await GetLunchMenuAsync();
-                fullMenu.ForEach(m => {
-                    if (m.Equals(WeekDay, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        startLogging = true;
-                        weekDayNames.Remove(WeekDay);
-                    }
-                    if (weekDayNames.Contains(m.ToUpper()))
-                    {
-                        startLogging = false;
-                    }
-                    if (startLogging)
-                    {
-                        dayMenu.Add(m);
-                    }
-                });
-                retVal = string.Join(",", dayMenu.Select(o => o));
-                retVal = retVal.Substring(retVal.IndexOf(",") + 1,retVal.Length- retVal.IndexOf(",")-1);
-                retVal = retVal.Substring(retVal.IndexOf(",") + 1, retVal.Length - retVal.IndexOf(",") - 1);
+                //fullMenu.ForEach(m => {
+                //    if (m.Equals(WeekDay, StringComparison.CurrentCultureIgnoreCase))
+                //    {
+                //        startLogging = true;
+                //        weekDayNames.Remove(WeekDay);
+                //    }
+                //    if (weekDayNames.Contains(m.ToUpper()))
+                //    {
+                //        startLogging = false;
+                //    }
+                //    if (startLogging)
+                //    {
+                //        dayMenu.Add(m);
+                //    }
+                //});
+                retVal = string.Join(",", fullMenu.Select(o => o));
+                //retVal = retVal.Substring(retVal.IndexOf(",") + 1, retVal.Length - retVal.IndexOf(",") - 1);
+                //retVal = retVal.Substring(retVal.IndexOf(",") + 1, retVal.Length - retVal.IndexOf(",") - 1);
+
             }
             catch (Exception exp)
             {
@@ -105,6 +106,7 @@ namespace OCR.Classes
                         HttpResponseMessage response;
 
                         byte[] byteData = CheckAndDownloadMenu().Result;
+                        //byte[] byteData = GetLocalImageAsStream(lunchMenuUri);
 
                         using (ByteArrayContent content = new ByteArrayContent(byteData))
                         {
@@ -126,6 +128,13 @@ namespace OCR.Classes
             return retVal;
         }
 
+        
+        private byte[] GetLocalImageAsStream(string ImagePath)
+        {
+            byte[] imageData = File.ReadAllBytes(ImagePath);
+            return imageData;
+        }
+        
         private async Task<byte[]> CheckAndDownloadMenu()
         {
             byte[] byteData = null;
