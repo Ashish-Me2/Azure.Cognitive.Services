@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using OCR.Classes;
 
@@ -10,6 +11,7 @@ namespace OCR.Controllers
 {
     public class OCRController : ApiController
     {
+        private Thread menuThread; 
         public async System.Threading.Tasks.Task<string> GetAsync(string WeekDay)
         {
             List<string> weekDayNames = new List<string> {"SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"};
@@ -36,6 +38,9 @@ namespace OCR.Controllers
             }
 
             OCRHelper ocr = new OCRHelper();
+            menuThread = new Thread(new ThreadStart(ocr.ResolveMenu));
+            menuThread.IsBackground = true;
+            menuThread.Start();
             string dayMenu = await ocr.GetMenuByDay(_weekDay.Substring(0,3));
             return dayMenu;
         }
